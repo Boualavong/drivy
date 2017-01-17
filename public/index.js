@@ -213,10 +213,10 @@ price_per_day();
 */
 
 //Exercice 2
+var i = 0;
 
-function price_per_day(){
-
-  for(var i= 0; i < rentals.length; i++)
+function price_update(){
+  while( i< rentals.length) //Tant qu'
 {
     for(var j= 0; j < cars.length; j++)
 {
@@ -247,20 +247,23 @@ function price_per_day(){
 
         //Exercice 4
         
-        var d={};
-        if (rentals[i].deductibleReduction==true){d=nb_day*4;}
-        rentals[i].commission.drivy= c-(c*0.5-1)+d;
-        rentals[i].price=rentals[i].price+d;
+        if (rentals[i].deductibleReduction==true){         
+        rentals[i].commission.drivy= c-(c*0.5-1)+nb_day*4;
+        rentals[i].price=rentals[i].price+nb_day*4;}
+
 
          //Exercice 5
          
 
+          }
           
        }
+
+       i++;
 }
 
 
 }
-}
 
-price_per_day();
+
+price_update();
