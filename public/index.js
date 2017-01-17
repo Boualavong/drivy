@@ -247,11 +247,12 @@ function price_update()
         var drivy_commission = rentals[i].commission.drivy=(c).toFixed(2);
 
         //Exercice 4
-        
+        var deductible = nb_day*4;
         if (rentals[i].deductibleReduction==true)
         {         
-        drivy_commission = c+nb_day*4;
-        rentals[i].price=rentals[i].price+nb_day*4;
+          drivy_commission = c+deductible;
+          rentals[i].price=rentals[i].price+deductible;
+
         }
 
          //Exercice 5
@@ -264,9 +265,9 @@ function price_update()
                {
                 if (actors[k].payment[l].who == "driver") { actors[k].payment[l].amount = rentals[k].price.toFixed(2); }
                 else if (actors[k].payment[l].who == "owner") { actors[k].payment[l].amount = (rentals[k].price-c).toFixed(2); }
-                else if (actors[k].payment[l].who == "insurance") { actors[k].payment[l].amount = (insurance).toFixed(2) }
-                else if (actors[k].payment[l].who == "assistance") { actors[k].payment[l].amount = (assistance).toFixed(2); }
-                else if (actors[k].payment[l].who == "drivy") { actors[k].payment[l].amount = drivy_commission; }
+                else if (actors[k].payment[l].who == "insurance") { actors[k].payment[l].amount = insurance }
+                else if (actors[k].payment[l].who == "assistance") { actors[k].payment[l].amount = assistance; }
+                else if (actors[k].payment[l].who == "drivy") { actors[k].payment[l].amount = drivy_commission+deductible; }
                }
             }
           }
