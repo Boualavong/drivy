@@ -271,14 +271,31 @@ function price_update()
                }
             }
           }
+          //Exercice 6
+
+
     }
     }
     i++;
   }
 }
 
+function modification()
+{
+   while( i< rentals.length) 
+  {
+              for (var m = 0; m< rentalModifications.length; m++) 
+          {
+            if (rentalModifications[m].rentalId == rentals[i].id) 
+            {
+              if (rentalModifications.pickupDate != rentals[i].pickupDate){rentals[i].pickupDate=rentalModifications.pickupDate;}
+              else if (rentalModifications.returnDate != rentals[i].returnDate){rentals[i].returnDate=rentalModifications.returnDate;}
+              else if (rentalModifications.distance != NULL){rentals[i].distance+=rentalModifications.distance;}
+            }
+          }
+     i++;
+  }
+}
 
-
-
-
+modification();
 price_update();
