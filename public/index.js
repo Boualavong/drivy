@@ -215,11 +215,12 @@ price_per_day();
 //Exercice 2
 var i = 0;
 
-function price_update(){
-  while( i< rentals.length) //Tant qu'
+function price_update()
 {
-    for(var j= 0; j < cars.length; j++)
-{
+  while( i< rentals.length) //Tant qu'il y a des location
+  {
+    for(var j= 0; j < cars.length; j++) //
+    {
       if (cars.vehicule==rentals.carId)
       {
 
@@ -241,29 +242,42 @@ function price_update(){
         //Exercice 3
         
         var c = rentals[i].price*0.3;
-        rentals[i].commission.insurance= c*0.5;
-        rentals[i].commission.assistance= 1;
-        rentals[i].commission.drivy= c-(c*0.5-1);
+        var insurance =  rentals[i].commission.insurance= (c*0.5).toFixed(2);
+        var assistance = rentals[i].commission.assistance= 1*nb_day;
+        var drivy_commission = rentals[i].commission.drivy=(c).toFixed(2);
 
         //Exercice 4
         
-        if (rentals[i].deductibleReduction==true){         
-        rentals[i].commission.drivy= c-(c*0.5-1)+nb_day*4;
-        rentals[i].price=rentals[i].price+nb_day*4;}
-
+        if (rentals[i].deductibleReduction==true)
+        {         
+        drivy_commission = c+nb_day*4;
+        rentals[i].price=rentals[i].price+nb_day*4;
+        }
 
          //Exercice 5
          
-
+          for (var k = 0; k < actors.length; k++) //pour chaque acteurs
+          {
+            if (actors[k].rentalId == rentals[i].id) 
+            {
+               for (var l= 0; l <  actors[k].payment.length ; l++) //pour parcourir les paiements
+               {
+                if (actors[k].payment[l].who == "driver") { actors[k].payment[l].amount = rentals[k].price.toFixed(2); }
+                else if (actors[k].payment[l].who == "owner") { actors[k].payment[l].amount = (rentals[k].price-c).toFixed(2); }
+                else if (actors[k].payment[l].who == "insurance") { actors[k].payment[l].amount = (insurance).toFixed(2) }
+                else if (actors[k].payment[l].who == "assistance") { actors[k].payment[l].amount = (assistance).toFixed(2); }
+                else if (actors[k].payment[l].who == "drivy") { actors[k].payment[l].amount = drivy_commission; }
+               }
+            }
           }
-          
-       }
-
-       i++;
+    }
+    }
+    i++;
+  }
 }
 
 
-}
+
 
 
 price_update();
